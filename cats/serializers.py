@@ -3,7 +3,7 @@ import datetime as dt
 import webcolors
 from rest_framework import serializers
 
-from .models import Achievement, AchievementCat, Cat, CHOICES, Owner
+from .models import CHOICES, Achievement, AchievementCat, Cat, Owner
 
 
 class Hex2NameColor(serializers.Field):
@@ -24,6 +24,14 @@ class AchievementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Achievement
         fields = ('id', 'achievement_name')
+
+
+class CatListSerializer(serializers.ModelSerializer):
+    color = serializers.ChoiceField(choices=CHOICES)
+
+    class Meta:
+        model = Cat
+        fields = ('id', 'name', 'color')
 
 
 class CatSerializer(serializers.ModelSerializer):
